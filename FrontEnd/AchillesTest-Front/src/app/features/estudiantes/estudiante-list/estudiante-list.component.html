@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    
+    <div class="card shadow-sm border-0 mb-3 bg-light">
+      <div class="card-body py-3 d-flex align-items-center gap-3">
+        <label class="fw-bold text-secondary mb-0">Filtrar por Provincia:</label>
+        <select class="form-select w-auto" 
+                [ngModel]="idProvinciaSeleccionada" 
+                (change)="onProvinciaChange($any($event.target).value)">
+          @for (p of provincias; track p.idProvincia) {
+            <option [value]="p.idProvincia">{{ p.nomb_pro }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="card shadow border-0">
+      <div class="card-body p-4">
+        <h2 class="text-center text-primary fw-bold mb-4">Listado de Estudiantes</h2>
+        
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Provincia</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (estudiante of datosPaginados?.items; track $index) {
+                <tr>
+                  <td class="fw-bold">{{ estudiante.nombre }}</td>
+                  <td>{{ estudiante.apellido }}</td>
+                  <td><span class="badge bg-info text-dark">{{ estudiante.provincia }}</span></td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="3" class="text-center py-4 text-muted">No hay estudiantes en esta provincia.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+          <button class="btn btn-outline-primary px-4" 
+                  [disabled]="paginaActual === 1" 
+                  (click)="cambiarPagina(paginaActual - 1)">
+            Anterior
+          </button>
+          
+          <span class="fw-bold">
+            Página {{ paginaActual }} de {{ datosPaginados?.totalPages }}
+          </span>
+
+          <button class="btn btn-primary px-4" 
+                  [disabled]="paginaActual === datosPaginados?.totalPages" 
+                  (click)="cambiarPagina(paginaActual + 1)">
+            Siguiente
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

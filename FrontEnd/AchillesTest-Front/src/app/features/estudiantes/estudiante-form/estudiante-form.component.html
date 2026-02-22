@@ -1,0 +1,52 @@
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-header bg-primary text-white text-center py-3">
+        <h4 class="mb-0">Nuevo Estudiante</h4>
+      </div>
+      <div class="card-body p-4">
+        
+        <form [formGroup]="form" (ngSubmit)="guardar()">
+          
+          <div class="mb-3">
+            <label class="form-label fw-bold">Nombre</label>
+            <input type="text" formControlName="nomb_est" class="form-control" 
+                   [class.is-invalid]="form.get('nomb_est')?.invalid && form.get('nomb_est')?.touched"
+                   placeholder="Ej: Juan">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Apellido</label>
+            <input type="text" formControlName="apel_est" class="form-control"
+                   [class.is-invalid]="form.get('apel_est')?.invalid && form.get('apel_est')?.touched"
+                   placeholder="Ej: Pérez">
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-bold">Distrito</label>
+            <select formControlName="idDistrito" class="form-select"
+                    [class.is-invalid]="form.get('idDistrito')?.invalid && form.get('idDistrito')?.touched">
+              <option [ngValue]="null" disabled>Selecciona un distrito...</option>
+              
+              @for (distrito of distritos; track distrito.idDistrito) {
+                <option [value]="distrito.idDistrito">
+                  {{ distrito.provincia }} - {{ distrito.nomb_dis }}
+                </option>
+              }
+            </select>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary btn-lg shadow-sm">
+              Guardar Estudiante
+            </button>
+            <a routerLink="/estudiantes" class="btn btn-link text-muted text-decoration-none text-center">
+              Cancelar
+            </a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

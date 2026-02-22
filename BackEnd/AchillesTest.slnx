@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AchillesTest.Application/AchillesTest.Application.csproj" />
+  <Project Path="AchillesTest.Domain/AchillesTest.Domain.csproj" />
+  <Project Path="AchillesTest.Infrastructure/AchillesTest.Infrastructure.csproj" />
+  <Project Path="AchillesTest.WebApi/AchillesTest.WebApi.csproj" />
+</Solution>
